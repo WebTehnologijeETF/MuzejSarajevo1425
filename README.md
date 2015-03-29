@@ -1,4 +1,4 @@
 # PortalSarajevo1425
-Naziv projekta: Portal Sarajeva 1425 <br>
+Naziv projekta: Portal Sarajevo 1425 <br>
 Opis:<br>
 Stranica je namijenjena da bude kolekcija činjenica i informacija o opsadi Sarajeva tokom 1992.-1995. godine. Trebalo bi da jasno i na jednom mjestu ponudi informacije o osnovnim dešavanjima tokom opsade i da posluži kao uvod/dopuna za projekat "Sarajevski ratni predmeti" te kao vodič za one koje interesuje detaljnije upoznavanje sa tematikom ( "dark tourism" ) . Stranica je dodatak diplomskom radu iz predmeta Računarska grafika a koji se odnosi na projekat "Sarajevski ratni predmeti". Kao takva, stranica ce se iskoristiti i kao prezenatacija diplomskog rada po njegovom završetku a svoju konkretnu primjenu će naći na zvaničnoj stranici za projekat "Sarajevski ratni predmeti" prof. Rizvić. Stranica je pravljena prema Google chrome i Mozzila firefox web pretraživačima.
