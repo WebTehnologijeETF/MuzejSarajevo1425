@@ -114,7 +114,8 @@ h1{
 	font-size: x-large;
 }
 .obicni_tekst
-{text-decoration: none;
+{
+text-decoration: none;
 font-weight: normal;
  }
 .post {
