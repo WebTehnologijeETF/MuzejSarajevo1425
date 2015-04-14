@@ -579,62 +579,62 @@ function promjeniMart1996(){
 }
 //godine
 function promjeni1996(){
-	var x=document.getElementById('1996plus');
+	var x=document.getElementById('godina1996plus');
 	if (x.innerHTML==="+"){
 		x.innerHTML="-";
-		document.getElementById('1996').style.display="block";
+		document.getElementById('godina1996').style.display="block";
 		
 	}
 	else{
 	x.innerHTML="+";
-	document.getElementById('1996').style.display="none";
+	document.getElementById('godina1996').style.display="none";
 	}
 }
 function promjeni1995(){
-	var x=document.getElementById('1995plus');
+	var x=document.getElementById('godina1995plus');
 	if (x.innerHTML==="+"){
 		x.innerHTML="-";
-		document.getElementById('1995').style.display="block";
+		document.getElementById('godina1995').style.display="block";
 		
 	}
 	else{
 	x.innerHTML="+";
-	document.getElementById('1995').style.display="none";
+	document.getElementById('godina1995').style.display="none";
 	}
 }
 function promjeni1994(){
-	var x=document.getElementById('1994plus');
+	var x=document.getElementById('godina1994plus');
 	if (x.innerHTML==="+"){
 		x.innerHTML="-";
-		document.getElementById('1994').style.display="block";
+		document.getElementById('godina1994').style.display="block";
 		
 	}
 	else{
 	x.innerHTML="+";
-	document.getElementById('1994').style.display="none";
+	document.getElementById('godina1994').style.display="none";
 	}
 }
 function promjeni1993(){
-	var x=document.getElementById('1993plus');
+	var x=document.getElementById('godina1993plus');
 	if (x.innerHTML==="+"){
 		x.innerHTML="-";
-		document.getElementById('1993').style.display="block";
+		document.getElementById('godina1993').style.display="block";
 		
 	}
 	else{
 	x.innerHTML="+";
-	document.getElementById('1993').style.display="none";
+	document.getElementById('godina1993').style.display="none";
 	}
 }
 function promjeni1992(){
-	var x=document.getElementById('1992plus');
+	var x=document.getElementById('godina1992plus');
 	if (x.innerHTML==="+"){
 		x.innerHTML="-";
-		document.getElementById('1992').style.display="block";
+		document.getElementById('godina1992').style.display="block";
 		
 	}
 	else{
 	x.innerHTML="+";
-	document.getElementById('1992').style.display="none";
+	document.getElementById('godina1992').style.display="none";
 	}
 }
