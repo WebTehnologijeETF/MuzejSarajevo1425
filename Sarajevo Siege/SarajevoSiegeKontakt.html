@@ -23,10 +23,10 @@
 
 
 
-				<form id="kontakt_forma" action="#">
+				<form id="kontakt_forma" action="#" name="kontakt_forma" onsubmit="return validacija();" method="post">
 					<div class="red">
 						<label for="ime">Ime:</label><br>
-						<input id="ime" class="input" name="ime" type="text" value="" size="30" ><br>
+						<input id="ime" class="input" name="ime" type="text" value="" size="30" required><br>
 					</div>
 					<div class="red">
 						<label for="prezime">Prezime:</label><br>
@@ -34,13 +34,17 @@
 					</div>
 					<div class="red">
 						<label for="email">Email:</label><br>
-						<input id="email" class="input" name="email" type="text" value="" size="30" ><br>
+						<input id="email" class="input" name="email" type="text" value="" size="30" required><br>
 					</div>
 					<div class="red">
 						<label for="poruka">Poruka:</label><br>
-						<input id="poruka" class="input" name="poruka" type="text"><br>
+						<input id="poruka" class="input" name="poruka" type="text" required><br>
 					</div>
-					<input id="posalji" type="submit" value="Pošalji" >
+					
+					<input id="posalji" type="submit" value="Pošalji">
+					<p id="obavjestenje"></p>
+
+					<script type="text/javascript" src="validacija.js"></script>
 				</form>		
 			</div>
 
