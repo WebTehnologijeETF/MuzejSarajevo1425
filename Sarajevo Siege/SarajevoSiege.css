@@ -39,7 +39,7 @@ letter-spacing:-.05em;
 #menu li{
 	float:left;
 	list-style-image: none;
-	padding: 10px;
+	padding: 5px;
 }
 #menu a
 {
@@ -47,7 +47,7 @@ letter-spacing:-.05em;
 	color: black;
 }
 #menu a:hover{
-padding:100% 10px 10px 10px;
+padding:100% 2px 2px 2px;
 	background:#181818;
 	color:#ffffff;
 	border-radius:0 0 10px 10px;
@@ -55,7 +55,7 @@ padding:100% 10px 10px 10px;
 }
 #menu #active a
 {
-	padding:100% 10px 10px 10px;
+	padding:100% 2px 2px 2px;
 	background:#181818;
 	color:#ffffff;
 	border-radius:0 0 10px 10px;
