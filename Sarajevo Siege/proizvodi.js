@@ -78,6 +78,11 @@ if (window.XMLHttpRequest)
 			if (ajax.readyState == 4 && ajax.status == 200)
 			{
 					alert("Uspjesno ste dodali novi proizvod");
+					document.getElementById("id").value="";
+				    document.getElementById("naziv").value="";
+                    document.getElementById("opis").value="";
+                    document.getElementById("kolicina").value="";
+                    document.getElementById("cijena").value="";
 					load();
 				return true;
 				
@@ -142,6 +147,12 @@ if (window.XMLHttpRequest)
 			if (ajax.readyState == 4 && ajax.status == 200)
 			{
 					alert("Uspjesno ste promijenili podatke  o proizvodu");
+					document.getElementById("id").value="";
+				    document.getElementById("naziv").value="";
+                    document.getElementById("opis").value="";
+                    document.getElementById("kolicina").value="";
+                    document.getElementById("cijena").value="";
+  
 						load();
 				return true;
 				
@@ -198,6 +209,7 @@ if (window.XMLHttpRequest)
 			{
 					alert("Uspjesno ste obrisali proizvod");
 						load();
+						document.getElementById("id").value="";
 				return true;
 				
 				}

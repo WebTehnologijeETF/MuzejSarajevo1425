@@ -35,16 +35,16 @@
 						<select id="dostupnost">
                          <option value="dostupno">1</option>
                           <option value="nedostupno">0</option>
-                          </select>
-                          </form>
-                          <div id="dugmad">
+                          </select><br>
+                         
+                       <!--   <div id="dugmad"> -->
 <input type="button" value="Dodaj" onclick="add()">
-<input type="button" value="Osvježi" onclick="load()">
+<input type="button" value="Osvježi tabelu" onclick="load()"> <br>
+<br><label for="ID">Obriši/Izmijeni:</label><br>
+<input id="id" class="input" name="if" type="text" value="ID" size="20" ><br>
 <input type="button" value="Promijeni" onclick="update()">
-<input type="button" value="Obriši" onclick="deletes()"> <br>
-<label for="ID">Obriši/Izmijeni:</label><br>
-<input id="id" class="input" name="if" type="text" value="" size="20" ><br>
-</div>
+<input type="button" value="Obriši" onclick="deletes()">
+</form>
 <p>Podaci o suvenirima:</p><br>
 <table id="proizvodi" border="1">
 
