@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+			<TITLE>Sarajevo Seige</TITLE>
+			<link rel="stylesheet" type="text/css" href="SarajevoSiege.css">
+<script type="text/javascript" src="proizvodi.js"></script>
+
+
+</head>
+
+
+<body onload="load()">
+<div id="logo">
+				<p id="logo_tekst">Sarajevo<br>1425</p>
+			</div>
+			<div id="centar">
+<ul id="menu">
+				<li > <a onclick="loadPages('index.html')">POČETNA</a></li>
+					<li><a onclick="loadPages('Sarajevo%20SiegeHronologija.html')">HRONOLOGIJA</a></li>
+					<li><a onclick="loadPages('SarajevoSiegeGalerija.html')">GALERIJA</a></li>
+					<li><a onclick="loadPages('SarajevoSiegeProjekti.html')">PROJEKTI</a></li>
+					<li><a onclick="loadPages('SarajevoSiegeMapa.html')">ŠTA VIDJETI</a></li>
+					<li><a onclick="loadPages('SarajevoSiegeKontakt.html')">KONTAKT</a></li>
+					<li id="active"><a onclick="loadPages('suveniri.html')">SUVENIRI</a></li>
+				</ul>
+<p>Podaci o suvenirima:</p><br>
+<table id="proizvodi" border="1">
+
+<tr>
+<th>Naziv</th>
+<th>Opis</th>
+<th>Količina</th>
+<th>Cijena</th>
+<th>Dostupnost</th>
+
+</tr>
+</table><br>
+<div id="dugmad">
+<input type="button" value="Dodaj" onclick="add()">
+<input type="button" value="Osvježi" onclick="load()">
+<input type="button" value="Promijeni" onclick="update()">
+<input type="button" value="Obriši" onclick="deletes()">
+</div>
+
+</div>
+<script type="text/javascript" src="loadPages.js"></script>
+</body>
+
+
+
+</html>
