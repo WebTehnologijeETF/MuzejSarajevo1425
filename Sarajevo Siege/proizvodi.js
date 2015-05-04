@@ -1,7 +1,15 @@
 function load()
 {
-			var ajax = new XMLHttpRequest();
-			var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php";
+			var ajax;
+if (window.XMLHttpRequest)
+   {
+      ajax=new XMLHttpRequest();
+   }
+   else
+   {
+      ajax=new ActiveXObject("Microsoft.XMLHTTP");
+   }
+			var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php?brindexa=15773";
 			
 			ajax.onreadystatechange = function() {// Anonimna funkcija
 			if (ajax.readyState == 4 && ajax.status == 200)
@@ -9,19 +17,19 @@ function load()
 					var data = JSON.parse(ajax.responseText);
 					
 					var t = document.getElementById('proizvodi');
-					
+					var t1='<tr><th>ID</th><th>Naziv</th><th>Opis</th><th>Količina</th><th>Cijena</th><th>Dostupnost</th></tr>;'
 					for(var i=0;i< data.length;i++)
 					{
-					var novi = '<tr><td>' + data[i].naziv + '</td>' + '\
+					var novi = '<tr><td>' + data[i].id + '</td>' + '\
+					<td>' + data[i].naziv + '</td>' + '\
 					<td>' + data[i].opis + '</td>' + '\
-					<td>' + data[i].url + '</td>' + '\
 					<td>' + data[i].kolicina + '</td>' +'\
 					<td>' + data[i].cijena + '</td>' + '\
 					<td>' + data[i].dostupnost + '</td></tr>';
-					
-					t.innerHTML = t.innerHTML + novi;
+					t1=t1+novi;
 					
 					}
+					t.innerHTML = t1;
 				
 				
 				}
@@ -39,35 +47,54 @@ function load()
 }
 
 
+
 function add()
 {
-	var ajax = new XMLHttpRequest();
-			var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php";
-			
+	var ajax;
+if (window.XMLHttpRequest)
+   {
+      ajax=new XMLHttpRequest();
+   }
+   else
+   {
+      ajax=new ActiveXObject("Microsoft.XMLHTTP");
+   }
+			var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php?brindexa=15773";
+	var _naziv = document.getElementById("naziv");
+    var _opis = document.getElementById("opis");
+    var _kolicina=document.getElementById("kolicina");
+    var _cijena=document.getElementById("cijena");
+    var _dostupnost=document.getElementById("dostupnost");
+	
 			var proizvod = {
-			
-			brIndeksa="15773",
-				naziv: "Zastava",
-			   opis :"Zastava koja je korištena tokom agresije",
-				kolicina : "1",
-			cijena : "5"
-			dostupnost :"1"
-				
-				};
+			naziv: _naziv.value,
+			opis :_opis.value,
+			kolicina : _kolicina.value,
+			cijena : _cijena.value,
+			dostupnost :_dostupnost.value};
 				
 			
 			ajax.onreadystatechange = function() {// Anonimna funkcija
 			if (ajax.readyState == 4 && ajax.status == 200)
 			{
 					alert("Uspjesno ste dodali novi proizvod");
-				
+					load();
+				return true;
 				
 				}
-			if (ajax.readyState == 4 && ajax.status == 404)
+			else if (ajax.readyState == 4 && ajax.status == 404)
 				{
 					
 					
-						alert("error");
+						alert("Nepostojeći proizvod!");
+						return false;
+				}
+				else if (ajax.readyState == 4 && ajax.status == 400)
+				{
+					
+					
+						alert("Pogrešni podaci!");
+						return false;
 				}
 		}
 		
@@ -83,32 +110,55 @@ function add()
 
 function update()
 {
-	var ajax = new XMLHttpRequest();
-			var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php";
+			var ajax;
+if (window.XMLHttpRequest)
+   {
+      ajax=new XMLHttpRequest();
+   }
+   else
+   {
+      ajax=new ActiveXObject("Microsoft.XMLHTTP");
+   }
+			var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php?brindexa=15773";
 			
 			
+			var _naziv = document.getElementById("naziv");
+    var _opis = document.getElementById("opis");
+    var _kolicina=document.getElementById("kolicina");
+    var _cijena=document.getElementById("cijena");
+    var _dostupnost=document.getElementById("dostupnost");
+	
 			var proizvod = {
-			    brIndeksa="15773",
-				naziv: "Zastava",
-			   opis :"Zastava koja je korištena tokom agresije",
-				kolicina : "1",
-			cijena : "5"
-			dostupnost :"1"
+		    id: parseInt(document.getElementById("id").value),
+			naziv: _naziv.value,
+			opis :_opis.value,
+			kolicina : _kolicina.value,
+			cijena : _cijena.value,
+			dostupnost :_dostupnost.value};
 				
-				};
+			
 			
 			ajax.onreadystatechange = function() {// Anonimna funkcija
 			if (ajax.readyState == 4 && ajax.status == 200)
 			{
 					alert("Uspjesno ste promijenili podatke  o proizvodu");
-				
+						load();
+				return true;
 				
 				}
-			if (ajax.readyState == 4 && ajax.status == 404)
+			else if (ajax.readyState == 4 && ajax.status == 404)
 				{
 					
 					
-						alert("error");
+						alert("Nepostojeći proizvod!");
+						return false;
+				}
+				else if (ajax.readyState == 4 && ajax.status == 400)
+				{
+					
+					
+						alert("Pogrešni podaci!");
+						return false;
 				}
 		}
 		
@@ -123,32 +173,47 @@ function update()
 
 function deletes()
 {
-	var ajax = new XMLHttpRequest();
-			var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php";
+		var ajax;
+if (window.XMLHttpRequest)
+   {
+      ajax=new XMLHttpRequest();
+   }
+   else
+   {
+      ajax=new ActiveXObject("Microsoft.XMLHTTP");
+   }
+		var param = "http://zamger.etf.unsa.ba/wt/proizvodi.php?brindexa=15773";
 			
 			
 			var proizvod = {
-			    brIndeksa="15773",
-				naziv: "Zastava",
-			    opis :"Zastava koja je korištena tokom agresije",
-				kolicina : "1",
-			    cijena : "5"
-			    dostupnost :"1"
-				
-				};
+			id: parseInt(document.getElementById("id").value),
+            naziv: "",
+            opis: "",
+			kolicina : "",
+			cijena : "",
+			dostupnost :"0" };
 			
 			ajax.onreadystatechange = function() {// Anonimna funkcija
 			if (ajax.readyState == 4 && ajax.status == 200)
 			{
 					alert("Uspjesno ste obrisali proizvod");
-				
+						load();
+				return true;
 				
 				}
-			if (ajax.readyState == 4 && ajax.status == 404)
+			else if (ajax.readyState == 4 && ajax.status == 404)
 				{
 					
 					
-						alert("error");
+						alert("Nepostojeći proizvod!");
+						return false;
+				}
+				else if (ajax.readyState == 4 && ajax.status == 400)
+				{
+					
+					
+						alert("Pogrešni podaci!");
+						return false;
 				}
 		}
 		

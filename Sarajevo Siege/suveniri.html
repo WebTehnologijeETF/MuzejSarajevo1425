@@ -4,11 +4,8 @@
 <META http-equiv="Content-Type" content="text/html; charset=utf-8">
 			<TITLE>Sarajevo Seige</TITLE>
 			<link rel="stylesheet" type="text/css" href="SarajevoSiege.css">
-<script type="text/javascript" src="proizvodi.js"></script>
-
 
 </head>
-
 
 <body onload="load()">
 <div id="logo">
@@ -24,10 +21,35 @@
 					<li><a onclick="loadPages('SarajevoSiegeKontakt.html')">KONTAKT</a></li>
 					<li id="active"><a onclick="loadPages('suveniri.html')">SUVENIRI</a></li>
 				</ul>
+<form id="kontakt_forma">
+                        
+					    <label for="naziv">Naziv:</label><br>
+						<input id="naziv" class="input" name="naziv" type="text" value="" size="20" ><br>
+						 <label for="opis">Opis:</label><br>
+						<input id="opis" class="input" name="opis" type="text" value="" size="30" ><br>
+						 <label for="kolicina">Količina:</label><br>
+						<input id="kolicina" class="input" name="kolicina" type="text" value="" size="20" ><br>
+						 <label for="cijena">Cijena:</label><br>
+						<input id="cijena" class="input" name="cijena" type="text" value="" size="20" ><br>
+						 <label for="dostupnost">Dostupnost:</label><br>
+						<select id="dostupnost">
+                         <option value="dostupno">1</option>
+                          <option value="nedostupno">0</option>
+                          </select>
+                          </form>
+                          <div id="dugmad">
+<input type="button" value="Dodaj" onclick="add()">
+<input type="button" value="Osvježi" onclick="load()">
+<input type="button" value="Promijeni" onclick="update()">
+<input type="button" value="Obriši" onclick="deletes()"> <br>
+<label for="ID">Obriši/Izmijeni:</label><br>
+<input id="id" class="input" name="if" type="text" value="" size="20" ><br>
+</div>
 <p>Podaci o suvenirima:</p><br>
 <table id="proizvodi" border="1">
 
 <tr>
+<th>ID</th>
 <th>Naziv</th>
 <th>Opis</th>
 <th>Količina</th>
@@ -36,15 +58,10 @@
 
 </tr>
 </table><br>
-<div id="dugmad">
-<input type="button" value="Dodaj" onclick="add()">
-<input type="button" value="Osvježi" onclick="load()">
-<input type="button" value="Promijeni" onclick="update()">
-<input type="button" value="Obriši" onclick="deletes()">
-</div>
 
 </div>
 <script type="text/javascript" src="loadPages.js"></script>
+<script type="text/javascript" src="proizvodi.js"></script>
 </body>
 
 
