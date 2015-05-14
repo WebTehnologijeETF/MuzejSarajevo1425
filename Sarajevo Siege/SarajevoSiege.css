@@ -279,3 +279,14 @@ position: absolute;
 		margin-left: 30%;
 		margin-right: 30%;
 }
+.error
+{
+	color: #FF0000;
+}
+.naKF
+{
+	/*padding-top: 1%;*/
+	color: black;	;
+	padding-right: 10px;
+    padding-left: 10px;
+}

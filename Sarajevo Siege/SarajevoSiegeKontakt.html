@@ -21,20 +21,89 @@
 					<li><a onclick="loadPages('suveniri.html')">SUVENIRI</a></li>
 				</ul>
 
+<?php
+// define variables and set to empty values
+$errime = $errprezime = $erremail = $errporuka =  "";
+$ime = $prezime = $email = $poruka =  "";
 
+if (isset($_REQUEST['ime'])) {
+	if(empty($_REQUEST["ime"]))
+	{
+		$errime="Niste unijeli ime";
+	}
+	else{
+  $ime = test_input($_REQUEST["ime"]);
+  if (!preg_match("/^[a-zA-Z ]*$/",$ime)) {
+  $errime = "Ime smije da sadrži samo slova"; 
+}
+  else if(strlen($ime)<=2){
+  	 $errime = "Prekratko ime"; 
+}
+}
 
-				<form id="kontakt_forma" action="#" name="kontakt_forma" onsubmit="return validacija();" method="get">
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(empty($_POST["email"]))
+	{
+		$erremail="Niste unijeli email adresu";
+	}
+	else{
+  $email = test_input($_POST["email"]);
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  $erremail = "Neispravna email adresa"; 
+}
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(empty($_POST["prezime"]))
+	{
+		$errprezime="Niste unijeli prezime";
+	}
+	else{
+  $prezime = test_input($_POST["prezime"]);
+   if (!preg_match("/^[a-zA-Z ]*$/",$prezime)) {
+  $errime = "Prezime smije da sadrži samo slova"; 
+}
+ else if(strlen($prezime)<=2){
+  	 $errprezime = "Prekratko prezime"; 
+}
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(empty($_POST["poruka"]))
+	{
+		$errporuka="Niste unijeli poruka";
+	}
+	else{
+  $poruka = test_input($_POST["poruka"]);
+}
+ else if(strlen($poruka)<=20){
+  	 $errporuka = "Prekratka poruka"; 
+}
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
+				<form id="kontakt_forma" action="SarajevoSiegeKontakt.php" name="kontakt_forma" onsubmit="return validacija();" method="post">
 					<div class="red">
 						<label for="ime">Ime:</label><br>
-						<input id="ime" class="input" name="ime" type="text" value="" size="30" required><br>
+						<input id="ime" class="input" name="ime" type="text" value="<?php echo $ime;?>" size="30" required><br>
+						<span class="error">* <?php echo $errime;?></span>
 					</div>
 					<div class="red">
 						<label for="prezime">Prezime:</label><br>
-						<input id="prezime" class="input" name="prezime" type="text" value="" size="30" ><br>
+						<input id="prezime" class="input" name="prezime" type="text" value="<?php echo $prezime;?>" size="30" ><br>
+						<span class="error">* <?php echo $errprezime;?></span>
 					</div>
 					<div class="red">
 						<label for="email">Email:</label><br>
-						<input id="email" class="input" name="email" type="text" value="" size="30" required><br>
+						<input id="email" class="input" name="email" type="text" value="<?php echo $email;?>" size="30" required><br>
+						<span class="error">* <?php echo $erremail;?></span>
 					</div>
 					<div class="red">
 						<label for="opcina">Općina:</label><br>
@@ -48,9 +117,10 @@
 					
 					<div class="red">
 						<label for="poruka">Poruka:</label><br>
-						<input id="poruka" class="input" name="poruka" type="text" required><br>
+						<input id="poruka" class="input" name="poruka" type="text" value="<?php echo $poruka;?>" required><br>
+						<span class="error">* <?php echo $errporuka;?></span>
 					</div>
-					<input id="posalji" type="button" value="Pošalji" onclick="validirajFormu()">
+					<input id="posalji" type="submit" value="Pošalji" onclick="validirajFormu()">
 
 					<!--<script type="text/javascript" src="validacija.js"></script>  -->
 					<script type="text/javascript" src="validirajFormu.js"></script>
