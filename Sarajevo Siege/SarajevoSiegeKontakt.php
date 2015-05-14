@@ -10,13 +10,13 @@
 		<BODY>
 
 <?php
-// define variables and set to empty values
-$errime = $errprezime = $erremail = $errporuka = $pod= $siguran=$obavijest=$reset=$poslanMail="";
+
+$errime = $errprezime = $erremail = $errporuka = $pod= $siguran=$obavijest=$reset=$poslanMail=$erropcina=$errmjesto="";
 $ime = $prezime = $email = $poruka = $opcina =$mjesto ="";
 $provjera=false;
 if(isset($_POST['reset'])){
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$errime = $errprezime = $erremail = $errporuka = $pod= $siguran=$obavijest=$reset="";
+	$errime = $errprezime = $erremail = $errporuka = $pod= $siguran=$obavijest=$reset=$poslanMail=$erropcina=$errmjesto="";
 $ime = $prezime = $email = $poruka = $opcina =$mjesto ="";
 $provjera=false;
 }
@@ -27,21 +27,58 @@ if(isset($_POST['siguran'])){
 $to = "abesic4@etf.unsa.ba";
 $subject ="Poruka posjetioca";
 $txt = "Ime: ".$ime.PHP_EOL." Prezime: ".$prezime.PHP_EOL." Općina: ".$opcina.PHP_EOL." Mjesto: ".$mjesto.PHP_EOL." Email: ".$email. PHP_EOL." Poruka:".$poruka;
+$txt = wordwrap($txt,70);
 $headers = "From:".email."\r\n"."CC: irfanpra@gmail.com"."\r\n". "Replay:".$email;
 
-mail($to,$subject,$txt,$headers);
-$errime = $errprezime = $erremail = $errporuka = $pod= $siguran=$obavijest=$reset="";
+if(mail($to,$subject,$txt,$headers)){
+$errime = $errprezime = $erremail = $errporuka = $pod= $siguran=$obavijest=$reset=$poslanMail=$erropcina=$errmjesto="";
 $ime = $prezime = $email = $poruka = $opcina =$mjesto ="";
 $provjera=false;
 $poslanMail="<p>Zahvaljujemo se što ste nas kontaktirali</p>";
+}
+else echo "Poruka nije poslana";
 }
 }
 
 if(isset($_POST['posalji'])){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
- $opcina = test_input($_POST["opcina"]);
+
+ if(empty($_POST["opcina"]))
+	{
+		$erropcina="Niste unijeli općinu";
+		$provjera=true;
+	}
+	else{
+  $opcina = test_input($_POST["opcina"]);
+  if (!preg_match("/^[a-zA-Z ]*$/",$opcina)) {
+  $erropcina = "Niste unijeli ispravnu općinu!"; 
+  $provjera=true;
+}
+  else if(strlen($opcina)<=2){
+  	 $erropcina = "Niste unijeli ispravnu općinu!"; 
+  	 $provjera=true;
+}
+}
+  
+
+  if(empty($_POST["mjesto"]))
+	{
+		$errmjesto="Niste unijeli mjesto";
+		$provjera=true;
+	}
+	else{
   $mjesto = test_input($_POST["mjesto"]);
+  if (!preg_match("/^[a-zA-Z ]*$/",$mjesto)) {
+  $errmjesto = "Niste unijeli ispravno mjesto!"; 
+  $provjera=true;
+}
+  else if(strlen($mjesto)<=2){
+  	 $errmjesto = "Niste unijeli ispravno mjesto!"; 
+  	 $provjera=true;
+}
+}
+
 	if(empty($_POST["ime"]))
 	{
 		$errime="Niste unijeli ime";
@@ -77,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$errprezime="Niste unijeli prezime";
 		$provjera=true;
 	}
-	else{
+else{
   $prezime = test_input($_POST["prezime"]);
    if (!preg_match("/^[a-zA-Z ]*$/",$prezime)) {
   $errprezime = "Niste unijeli ispravno prezime!"; 
@@ -101,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   	 $provjera=true;
 }
 }
+
 }
 if($provjera==false){
    //include 'prikaz.php';
@@ -132,7 +170,8 @@ function test_input($data) {
 					<li id="active"><a onclick="loadPages('SarajevoSiegeKontakt.php')">KONTAKT</a></li>
 					<li><a onclick="loadPages('suveniri.html')">SUVENIRI</a></li>
 				</ul>
-				<form id="kontakt_forma" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="kontakt_forma"  method="post">
+				<!--onsubmit="return validacija();"-->
+				<form id="kontakt_forma" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="kontakt_forma"  method="post" >
 					<div ><span><?php echo $pod;?></span> </div>
 					<div ><span><?php echo $siguran;?></span> </div>
 						<div ><span><?php echo $obavijest;?></span> </div>
@@ -155,11 +194,13 @@ function test_input($data) {
 					<div class="red">
 						<label for="opcina">Općina:</label><br>
 						<input id="opcina" name="opcina" type="text"  size="30" value="<?php echo $opcina;?>" ><br>
+						<span class="error"><?php echo $erropcina;?></span>
 					</div>
 					<div class="red">
 						<label for="mjesto">Mjesto:</label><br>
 						<input id="mjesto" name="mjesto" type="text"  size="30" value="<?php echo $mjesto;?>" ><br>
-						<p id="obavjestenje"></p>
+						<span class="error"><?php echo $errmjesto;?></span>
+							<p id="obavjestenje"></p>
 					</div>
 					
 					<div class="red">
@@ -167,7 +208,8 @@ function test_input($data) {
 						<input id="poruka" class="input" name="poruka" type="text" value="<?php echo $poruka;?>" required><br>
 						<span class="error"><?php echo $errporuka;?></span>
 					</div>
-					<input id="posalji" type="submit" value="Pošalji" name="posalji">
+					<!--onclick="validirajFormu()"-->
+					<input id="posalji" type="submit" value="Pošalji" name="posalji" >
 	                 <div ><span><?php echo $reset;?></span> </div>
 					<!--<script type="text/javascript" src="validacija.js"></script>  -->
 					<script type="text/javascript" src="validirajFormu.js"></script>

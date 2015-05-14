@@ -254,6 +254,8 @@ div
 #poruka{
 	height: 20%;
 	width: 75%;
+	word-wrap:break-word;
+	white-space: normal;
 }
 #logo
 {
