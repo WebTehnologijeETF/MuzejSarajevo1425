@@ -10,78 +10,71 @@
 		<BODY>
 
 		<?php 
+		 function prikaziCijeluVijest() {
+  }
+
+  if (isset($_GET['klikNaDetaljnije'])) {
+    prikaziCijeluVijest();
+  }
+		$sveVijesti="";
 		$veza = new PDO("mysql:dbname=sarajevoseige;host=localhost;charset=utf8", "adm", "1DvaTri");
-     $veza->exec("set names utf8");
-     $rezultat = $veza->query("select id, naslov, tekst, UNIX_TIMESTAMP(vrijeme) vrijeme2, autor from vijest order by vrijeme desc");
+       $veza->exec("set names utf8");
+       $rezultat = $veza->query("select id, naslov, tekst, UNIX_TIMESTAMP(datumObjave) vrijeme2, autor, url from vijest order by datumObjave desc");
      if (!$rezultat) {
           $greska = $veza->errorInfo();
           print "SQL greška: " . $greska[2];
           exit();
      }
-     else
-     {
+     foreach ($rezultat as $vijest) {
+     	if($vijest['url']=="nema slike")
+     	{
+     		 $nasl="<div class='post'><h1 class='Naslov'>".$vijest['naslov']."</h1>";
+     	}
+     	else 
+     	{
 
-     	 foreach ($rezultat as $vijest) {
+     		 $nasl="<div class='post' style='background-image: url('".$vijest['url']."')'><h1 class='Naslov'>".$vijest['naslov']."</h1>";
+     		}
+     	$komentari=$veza->query( "select count(*) broj from komentari where vijest=".$vijest['id']);     	
+     	$array = explode('\n',$vijest['tekst']);
+        $firstLine = $array[0];
+		$lin="<p class='linija_ispod'>".date("d.m.Y. (h:i)", $vijest['vrijeme2']).", objavio:<a href='#''>".$vijest['autor']."</a> </p>";
+		$tkst="<div class='tekst_objave'><p>".$firstLine."...</p>";
+        $brojKomentara0="<small>Nema komentara</small><br>";
+        $bk = $komentari->fetch(PDO::FETCH_ASSOC);
+        $brojKomentarax="<small>Komentari: ".$bk['broj']."</small><br>";
+        if($bk['broj']==0){
 
-$naslov="<h1>".$vijest['naslov']."</h1>";
-     	  $naslov="<div class='post'><h1 class='Naslov'>".$vijest['naslov']."</h1>";
-		 $linija="<p class='linija_ispod'>".$vijest['datumObjave'].", objavio:<a href='#''>".$vijest['autor']."</a> </p>";
-		$teskt="<div class='tekst_objave'><p>".$vijest['tekst']."</p>";
-		$detaljnije="</div><p class='meta'><a href='#'' class='detaljnije'>Detaljnjije</a> </p></div>";
-     }
+        	$det="</div>".$brojKomentara0."<p class='meta'><a href='index.php?klikNaDetaljnije=true class='detaljnije'>Detaljnjije</a> </p></div>";
+        $sveVijesti=$sveVijesti.$nasl.$lin.$tkst.$det;
+    }
+     
+    else
+    {
+    	$det="</div>".$brojKomentarax."<p class='meta'><a href='index.php?likNaDetaljnije=true class='detaljnije'>Detaljnjije</a> </p></div>";
+        $sveVijesti=$sveVijesti.$nasl.$lin.$tkst.$det;
+    }
+ 
+	}
 		    ?>
 			<div id="logo">
 				<p id="logo_tekst">Sarajevo<br>1425</p>
 			</div>
 			<div id="centar"> 
 				<ul id="menu">
-					<li id="active"> <a onclick="loadPages('index.html')">POČETNA</a></li>
+					<li id="active"> <a onclick="loadPages('index.php')">POČETNA</a></li>
 					<li><a onclick="loadPages('Sarajevo%20SiegeHronologija.html')">HRONOLOGIJA</a></li>
 					<li><a onclick="loadPages('SarajevoSiegeGalerija.html')">GALERIJA</a></li>
 					<li><a onclick="loadPages('SarajevoSiegeProjekti.html')">PROJEKTI</a></li>
 					<li><a onclick="loadPages('SarajevoSiegeMapa.html')">ŠTA VIDJETI</a></li>
 					<li><a onclick="loadPages('SarajevoSiegeKontakt.php')">KONTAKT</a></li>
 					<li><a onclick="loadPages('suveniri.html')">SUVENIRI</a></li>
+					<li><a onclick="loadPages('admin.php')">Admin</a></li>
 				</ul>
                <form id="vijesti" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="vijesti"  method="post" >
-
-                </form>
-				<div class="post">
-					<h1 class="Naslov">Obilježena godišnjica masakra na Markalama</h1>
-					<p class="linija_ispod">05.02.2015.god., objavio:<a href="#">admin</a> </p>
-					<div class="tekst_objave">
-						<p>Sjećanjem na 68 ubijenih i 144 ranjenih Sarajlija na Markalama, kao i sjećanjem na 11.541 ubijenih i više od 50.000 ranjenih naših sugrađana danas je obilježena  21. godišnjica od masakra na pijaci Markale kao i Dan sjećanja na sve stradale građane Sarajeva u periodu opsade 1992-1995. godina....</p>
-					</div>
-					<p class="meta"><a href="#" class="detaljnije">Detaljnjije</a> </p>
-				</div>
-				<div class="post_2">
-					<h1 class="Naslov">Obilježena godišnjica stradanja civila na Trgu ZAVNOBIH-a u Sarajevu </h1>
-					<p class="linija_ispod">20.09.2014.god., objavio:<a href="#">admin</a></p> 
-					<div class="tekst_objave">
-						<p>Polaganjem cvijeća na spomen-obilježje na Trgu ZAVNOBiH-a, na Ali-pašinom Polju, danas je obilježena 22. godišnjica stradanja šest građana Sarajeva, od kojih je troje bilo djece....</p>
-
-					</div>
-					<p class="meta"><a href="#" class="detaljnije">Detaljnjije</a> </p>
-				</div>
-				<div class="post">
-					<h1 class="Naslov">Obilježena godišnjica stradanja šest civila na Trgu heroja u Sarajevu</h1>
-					<p class="linija_ispod">25.08.2014.god., objavio:<a href="#">admin</a> </p>
-					<div class="tekst_objave">
-						<p>Na Trgu heroja u sarajevskoj Općini Novo Sarajevo danas je obilježena 22. godišnjica stradanja građana Sarajeva, šest civila, od kojih dvoje djece...</p>
-					</div>
-					<p class="meta"><a href="#" class="detaljnije">Detaljnjije</a> </p>
-				</div>
-
-				<div class="post">
-					<h1 class="Naslov">Svečano otvorenje Vijećnice</h1>
-					<p class="linija_ispod">09.05.2014.god., objavio:<a href="#">admin</a> </p>
-					<div class="tekst_objave">
-						<p>Sarajevska Vijećnica, simbol Sarajeva i Bosne i Herecegovine, nakon 22 godine ponovo je otvorena danas, 9. maja, na Dan Evrope i Dan pobjede nad fašizmom...</p>
-					</div>
-					<p class="meta"><a href="#" class="detaljnije">Detaljnjije</a> </p>
-				</div>
-
-
+                   <div ><span><?php echo $sveVijesti;?></span> </div>
+				
+               </form>
 			</div>
 <script type="text/javascript" src="loadPages.js"></script>
 			

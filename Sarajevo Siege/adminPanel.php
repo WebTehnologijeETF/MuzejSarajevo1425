@@ -17,8 +17,11 @@
    if(isset($_POST['obrisiVijest'])){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   try {
- $sql = "delete from vijest WHERE id=".$_POST['idVijesti'];
- $veza->exec($sql);
+
+    $idvijesti = $_POST['idVijesti'];
+    $upit = $veza->prepare("delete from vijest WHERE id=:id");
+    $upit->bindValue(":id", $idvijesti, PDO::PARAM_INT);
+    $upit->execute();
  echo "Vijesti je obrisana";
  }
 catch(PDOException $e) {
@@ -33,8 +36,10 @@ catch(PDOException $e) {
    if(isset($_POST['obrisiKom'])){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   try {
- $sql = "delete from komentari WHERE id=".$_POST['idKom'];
- $veza->exec($sql);
+    $idKomentara = $_POST['idKom'];
+    $upit = $veza->prepare("delete from komentari WHERE id=:id");
+    $upit->bindValue(":id", $idKomentara, PDO::PARAM_INT);
+    $upit->execute();
  echo "Komentar je obrisan";
  }
 catch(PDOException $e) {
