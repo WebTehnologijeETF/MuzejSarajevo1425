@@ -162,7 +162,7 @@ function test_input($data) {
 			</div>
 			<div id="centar">
 				<ul id="menu">
-					<li> <a onclick="loadPages('index.html')">POČETNA</a></li>
+					<li> <a onclick="loadPages('index.php')">POČETNA</a></li>
 					<li><a onclick="loadPages('Sarajevo%20SiegeHronologija.html')">HRONOLOGIJA</a></li>
 					<li><a onclick="loadPages('SarajevoSiegeGalerija.html')">GALERIJA</a></li>
 					<li><a onclick="loadPages('SarajevoSiegeProjekti.html')">PROJEKTI</a></li>

@@ -212,6 +212,14 @@ font-weight: normal;
 
 	
 }
+
+.admin
+{
+	text-align: right;
+ position: absolute;
+    right: 0px;
+}
+
 div
 {
 	margin-bottom: 2%;

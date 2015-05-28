@@ -8,6 +8,28 @@
 		</head>
 
 		<BODY>
+
+		<?php 
+		$veza = new PDO("mysql:dbname=sarajevoseige;host=localhost;charset=utf8", "adm", "1DvaTri");
+     $veza->exec("set names utf8");
+     $rezultat = $veza->query("select id, naslov, tekst, UNIX_TIMESTAMP(vrijeme) vrijeme2, autor from vijest order by vrijeme desc");
+     if (!$rezultat) {
+          $greska = $veza->errorInfo();
+          print "SQL greška: " . $greska[2];
+          exit();
+     }
+     else
+     {
+
+     	 foreach ($rezultat as $vijest) {
+
+$naslov="<h1>".$vijest['naslov']."</h1>";
+     	  $naslov="<div class='post'><h1 class='Naslov'>".$vijest['naslov']."</h1>";
+		 $linija="<p class='linija_ispod'>".$vijest['datumObjave'].", objavio:<a href='#''>".$vijest['autor']."</a> </p>";
+		$teskt="<div class='tekst_objave'><p>".$vijest['tekst']."</p>";
+		$detaljnije="</div><p class='meta'><a href='#'' class='detaljnije'>Detaljnjije</a> </p></div>";
+     }
+		    ?>
 			<div id="logo">
 				<p id="logo_tekst">Sarajevo<br>1425</p>
 			</div>
@@ -21,7 +43,9 @@
 					<li><a onclick="loadPages('SarajevoSiegeKontakt.php')">KONTAKT</a></li>
 					<li><a onclick="loadPages('suveniri.html')">SUVENIRI</a></li>
 				</ul>
+               <form id="vijesti" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="vijesti"  method="post" >
 
+                </form>
 				<div class="post">
 					<h1 class="Naslov">Obilježena godišnjica masakra na Markalama</h1>
 					<p class="linija_ispod">05.02.2015.god., objavio:<a href="#">admin</a> </p>
