@@ -77,6 +77,7 @@ div span
 	font-size: large;
 	font-weight: bold;
 }
+
 div a
 {
 	color: black;
@@ -149,11 +150,13 @@ font-weight: normal;
 .post {
 	padding: 0 0 20px 0;
 	color: white;
+   
 }
 
 .post_2 {
 	color: white;
 	padding: 0 0 20px 0;
+	
 	background:url(img/vijesti/zavnobih.jpg);
 }
 
@@ -181,14 +184,15 @@ font-weight: normal;
 }
 
 .meta {
-	border-top: 1px solid #202020 ;
+	
 	text-align: right;
-	color: red;
+	color: white;
 	text-decoration: none;
 	padding-top: 10px;
 }
 
 .meta a {
+	border-top: 1px solid #202020 ;
 	text-decoration: none;
 	color: white;
 	padding-left: 15px;
@@ -204,6 +208,14 @@ font-weight: normal;
 .tekst_objave p
 {
 	color: white;
+	 
+
+}
+.tekst_objave 
+{
+	color: white;
+	
+
 }
 #slika_zavnobih{
 	top: 0;
